@@ -1,0 +1,518 @@
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="format-detection" content="telephone=no">
+    <!-- <meta name="viewport" content="width=device-width,width=750px,minimum-scale=0.36, user-scalable=no"> -->
+    <!-- <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,viewport-fit=cover"> -->
+    <meta name="viewport" content="width=device-width,width=520px,minimum-scale=0.36, user-scalable=no">
+
+
+    <link rel="icon" href="imgs/favicon.png">
+    <title>三国争霸</title>
+    <link rel="stylesheet" type="text/css" href="css/common.css?v=2020120117">
+    <link rel="stylesheet" type="text/css" href="css/index.css?v=2020120117">
+  </head>
+  <body style="font-size: 12px;">
+    <div class="app">
+
+      <header>
+        <div class="sanGuoTimeBox">
+          <span style="height: 65px;float:left;">
+            <div class="sanGuoTime" style=""></div>
+            <div style="height:20px;line-height:20px;text-align: left;">v.2020120117</div>
+          </span>
+          
+          <span class="myName" style="font-weight: bold;"></span>
+        </div>
+        <ul class="navList flex">
+          <li onclick="selectPanelShow(0,this)">我的NFT</li>
+          <li onclick="selectPanelShow(1,this)" class="active">战场</li>
+          <li onclick="selectPanelShow(2,this)">武器库</li>
+        </ul>
+        <img class="menu_icon" src="imgs/menu_icon.png" onclick="getMenuPanel()">
+      </header>
+      <!-- myNFT -->
+
+      <div class="myNFT" style="display: none;">
+        <ul class="nftList flex">
+          <li onclick="selectNftListShow(0,this)" class="active">铲子</li>
+          <li onclick="selectNftListShow(1,this)">弓</li>
+          <li onclick="selectNftListShow(2,this)">箭</li>
+          <li onclick="selectNftListShow(3,this)">镰刀</li>
+          <li onclick="selectNftListShow(4,this)">剑</li>
+          <li onclick="selectNftListShow(5,this)">斧头</li>
+          <li onclick="selectNftListShow(6,this)">枪</li>
+          <li onclick="selectNftListShow(7,this)">锤子</li>
+          <!-- <div style="flex:1;"></div> -->
+        </ul>
+        <div class="myNftListBox">
+          <ul class="clear">
+            <!-- <li class="active">
+              <img src="imgs/nftShow.jpg">
+              <div class="text">品质:8888</div>
+            </li> -->
+          </ul>
+          <div class="KittiesGalleryPagination">
+            <div class="Pagination"></div>
+            <div class="all" onclick="selectMyNftAll()">全选</div>
+          </div>
+          <div class="mortgageBox flex">
+            <div class="actionBtn" onclick="stacknftBoxShow()" style="margin-left: 42px;">武器进库</div>
+            <img src="imgs/q.png" onclick="descriptionMsgBoxShow('stackNft')" style="margin-left:10px;">
+          </div>
+        </div>
+      </div>
+      <!-- sanguo -->
+      <div class="sanguo">
+        <ul class="sanguoBox">
+          <li class="sanguoBG1">
+            <div class="guoLiBox">
+              <img src="imgs/guoLiBG.png">
+              <div class="progressBox">
+                <div class="progress"></div>
+                <span class="text">
+                  <span id="sanguoHp_01">--</span> / <span id="sanguoTotalHp_01">--</span>
+                </span>
+              </div>
+            </div>
+            <div class="guoMsgBox">
+              <div class="flex" style="margin-top: -8px;">
+                
+                <div class="guoJiaBox">
+                  <img src="imgs/guoJia_01.png">
+                  <div class="rank"></div>
+                </div>
+                <div style="flex:1">
+                  <div class="flex">
+                    <img src="imgs/treasury.png" onclick="descriptionMsgBoxShow('treasury')">
+                    <div class="brokenCount flex">
+                      <img src="imgs/die.png" style="margin:0 5px;">*
+                      <span id="sanguoBrokencount_01" style="padding-left:5px;">--</span>
+                      <span style="flex:1;"></span>
+                    </div>
+                  </div>
+                  
+                  <div id="sanguoBurse_01" class="prizePool">--</div>
+                </div>
+              </div>
+              <div class="guoMsg flex">
+                防御：
+                <span id="sanguoDef_01">--</span>
+                
+                <span style="flex:1;"></span>
+              </div>
+              <div class="guoMsg">
+                总算力：<span id="sanguoTotalpower_01">--</span>
+              </div>
+              <div class="guoMsg">
+                行动点：<span class="">( <span id="sanguoSupplyACT_01"></span> / <span id="sanguoTotalACT_01"></span> )</span>
+              </div>
+            </div>
+            <div class="joinBtn" onclick="userAction(1)">行动</div>
+            <div class="myKingMsgShowPanelBox">
+              <div>待领取行动点</div>
+              <div id="myKingFreeAct_01">--</div>
+              <div class="flex" style="margin-top: 10px;">
+                <div class="btn" onclick="mining(1)">领取</div>
+                <img src="imgs/q.png" style="width:22px;margin-left:10px;" onclick="descriptionMsgBoxShow('point')">
+              </div>
+            </div>
+            <!-- <div class="btnBox">
+              <span class="btn" onclick="selectYourAction(1,'fire')">攻击</span>
+              <span class="btn" onclick="selectYourAction(1,'defence')">加防</span>
+              <span class="btn" onclick="selectYourAction(1,'heal')">回血</span>
+            </div> -->
+            <div class="noNftOnKingBox">
+              <div class="myKingMsgPanelBox flex" onclick="goToStackNftOnKing()">
+
+                <img src="imgs/noNftOnKing.png">
+                <!-- <div class="content">
+                  我的总面值：<span class="myParvalue">--</span><br>
+                  已投入行动点：<span class="myFreeact">--</span><br>
+                  待领取行动点：<span class="myMiningAct">--</span><br>
+                </div>
+                <div class="flex">
+                  <div class="btn" style="margin-top: 10px;" onclick="mining(1)">领取</div>
+                </div> -->
+                
+              </div>
+            </div>
+              
+          </li>
+          <li class="sanguoBG2">
+            <div class="guoLiBox">
+              <img src="imgs/guoLiBG.png">
+              <div class="progressBox">
+                <div class="progress"></div>
+                <span class="text">
+                  <span id="sanguoHp_02">--</span> / <span id="sanguoTotalHp_02">--</span>
+                </span>
+              </div>
+            </div>
+            <div class="guoMsgBox">
+              <div class="flex" style="margin-top: -8px;">
+                <div class="guoJiaBox">
+                  <img src="imgs/guoJia_02.png">
+                  <div class="rank"></div>
+                </div>
+                <div style="flex:1">
+                  <div class="flex">
+                    <img src="imgs/treasury.png" onclick="descriptionMsgBoxShow('treasury')">
+                    <div class="brokenCount flex">
+                      <img src="imgs/die.png" style="margin:0 5px;">*
+                      <span id="sanguoBrokencount_02" style="padding-left:5px;">--</span>
+                      <span style="flex:1;"></span>
+                    </div>
+                  </div>
+                  <div id="sanguoBurse_02" class="prizePool">--</div>
+                </div>
+              </div>
+              <div class="guoMsg flex">
+                防御：
+                <span id="sanguoDef_02">--</span>
+                
+                <span style="flex:1;"></span>
+              </div>
+              <div class="guoMsg">
+                总算力：<span id="sanguoTotalpower_02">--</span>
+              </div>
+              <div class="guoMsg">
+                行动点：<span class="">( <span id="sanguoSupplyACT_02"></span> / <span id="sanguoTotalACT_02"></span> )</span>
+              </div>
+            </div>
+            <div class="joinBtn" onclick="userAction(2)">行动</div>
+            <div class="myKingMsgShowPanelBox">
+              <div>待领取行动点</div>
+              <div id="myKingFreeAct_02">--</div>
+              <div class="flex" style="margin-top: 10px;">
+                <div class="btn" onclick="mining(2)">领取</div>
+                <img src="imgs/q.png" style="width:22px;margin-left:10px;" onclick="descriptionMsgBoxShow('point')">
+              </div>
+            </div>
+            <div class="noNftOnKingBox">
+              <div class="myKingMsgPanelBox flex" onclick="goToStackNftOnKing()">
+                <img src="imgs/noNftOnKing.png">
+              </div>
+            </div>
+            <!-- <div class="btnBox">
+              <span class="btn" onclick="selectYourAction(2,'fire')">攻击</span>
+              <span class="btn" onclick="selectYourAction(2,'defence')">加防</span>
+              <span class="btn" onclick="selectYourAction(2,'heal')">回血</span>
+            </div> -->
+            <!-- <div class="myKingMsgPanelBox">
+              <div class="content">
+                我的总面值：<span class="myParvalue">--</span><br>
+                已投入行动点：<span class="myFreeact">--</span><br>
+                待领取行动点：<span class="myMiningAct">--</span><br>
+              </div>
+              <div class="flex">
+                <div class="btn" onclick="mining(2)">领取</div>
+              </div>
+              
+            </div> -->
+          </li>
+          <li class="sanguoBG3">
+            
+            <div class="guoLiBox">
+              <img src="imgs/guoLiBG.png">
+              <div class="progressBox">
+                <div class="progress"></div>
+                <span class="text">
+                  <span id="sanguoHp_03">--</span> / <span id="sanguoTotalHp_03">--</span>
+                </span>
+              </div>
+            </div>
+            <div class="guoMsgBox">
+              <div class="flex" style="margin-top: -8px;">
+                <div class="guoJiaBox">
+                  <img src="imgs/guoJia_03.png">
+                  <div class="rank"></div>
+                </div>
+                <div style="flex:1">
+                  <div class="flex">
+                    <img src="imgs/treasury.png" onclick="descriptionMsgBoxShow('treasury')">
+                    <div class="brokenCount flex">
+                      <img src="imgs/die.png" style="margin:0 5px;">*
+                      <span id="sanguoBrokencount_03" style="padding-left:5px;">--</span>
+                      <span style="flex:1;"></span>
+                    </div>
+                  </div>
+                  <div id="sanguoBurse_03" class="prizePool">--</div>
+                </div>
+              </div>
+              <div class="guoMsg flex">
+                防御：
+                <span id="sanguoDef_03">--</span>
+                
+                <span style="flex:1;"></span>
+              </div>
+              <div class="guoMsg">
+                总算力：<span id="sanguoTotalpower_03">--</span>
+              </div>
+              <div class="guoMsg">
+                行动点：<span class="">( <span id="sanguoSupplyACT_03"></span> / <span id="sanguoTotalACT_03"></span> )</span>
+              </div>
+            </div>
+            <div class="joinBtn" onclick="userAction(3)">行动</div>
+            <div class="myKingMsgShowPanelBox">
+              <div>待领取行动点</div>
+              <div id="myKingFreeAct_03">--</div>
+              <div class="flex" style="margin-top: 10px;">
+                <div class="btn" onclick="mining(3)">领取</div>
+                <img src="imgs/q.png" style="width:22px;margin-left:10px;" onclick="descriptionMsgBoxShow('point')">
+              </div>
+            </div>
+            <div class="noNftOnKingBox">
+              <div class="myKingMsgPanelBox flex" onclick="goToStackNftOnKing()">
+                <img src="imgs/noNftOnKing.png">
+              </div>
+            </div>
+            <!-- <div class="btnBox">
+              <span class="btn" onclick="selectYourAction(3,'fire')">攻击</span>
+              <span class="btn" onclick="selectYourAction(3,'defence')">加防</span>
+              <span class="btn" onclick="selectYourAction(3,'heal')">回血</span>
+            </div> -->
+            <!-- <div class="myKingMsgPanelBox">
+              <div class="content">
+                我的总面值：<span class="myParvalue">--</span><br>
+                已投入行动点：<span class="myFreeact">--</span><br>
+                待领取行动点：<span class="myMiningAct">--</span><br>
+              </div>
+              <div class="flex">
+                <div class="btn" style="margin-top: 10px;" onclick="mining(3)">领取</div>
+              </div>
+              
+            </div> -->
+          </li>
+        </ul>
+        <div class="sanguoDataBox">
+          <ul>
+            <li class="flex">
+              <span class="item">投入EOS总量：<span id="commonQuantity">--</span></span>
+              <span class="item">投入NFT总量：<span id="commonNftcount">--</span></span>
+            </li>
+            <li class="flex">
+              <span class="item flex">
+                TIME奖池：
+                <span id="commonTimebonus">--</span>
+                <img src="imgs/q.png" style="width:20px;margin-left:10px;" onclick="descriptionMsgBoxShow('timebonus')">
+                <span style="flex:1;"></span>
+              </span>
+              <!-- <span class="item">已回购TIME总量：--</span> -->
+            </li>
+          </ul>
+        </div>
+        <div class="commonPrizePool flex">
+          EOS奖池：
+          <span id="sanguoCommonPrizePool">--</span>
+          <img src="imgs/q.png" style="width:20px;margin-left:10px;" onclick="descriptionMsgBoxShow('eosbonus')">
+          <span style="flex:1;"></span>
+        </div>
+      </div>
+      <!-- 武器库 -->
+
+      <div class="guoKu" style="display: none;">
+        <div class="guoKuNftListBox">
+          <!-- <ul class="clear"> -->
+          <ul>
+           
+            <!-- <li>
+              <img src="imgs/nftShow.jpg">
+              <div class="text">品质:8888</div>
+            </li> -->
+          </ul>
+          <div class="KittiesGalleryPagination">
+            <div class="Pagination"></div>
+            <div class="all" onclick="selectMyStackNftAll()">全选</div>
+          </div>
+          <div class="mortgageBox flex">
+
+            <div class="actionBtn" onclick="unStacknftBoxShow()">武器出库</div>
+          </div>
+        </div>
+      </div>
+      <!-- <div style="height: 188px;"></div>
+      <div class="footer flex">
+        掠宝（https://www.xloot.io）游戏资产交易平台版权所有©2019-2020<br>
+        v.2020110900
+      </div> -->
+      
+    </div>
+
+
+
+<div class="alert" id="stacknftBox" style="display:none;">
+  <!-- <div class="alert" id="stacknftBox"> -->
+  <div class="flex" style="height:100%;">
+    <div class="content">
+      <div class="header flex">
+        <span>进库信息</span>
+        <span style="flex:1;">
+        </span>
+        <span onclick="$('#stacknftBox').hide()">
+          <img src="imgs/close.png" alt="" class="closeSvg">
+        </span>
+      </div>
+      <div class="stackCountryBox">
+        
+        <ul class="countryList flex">
+          <li onclick="selectStackCountry(1,this)">魏国</li>
+          <li onclick="selectStackCountry(2,this)">蜀国</li>
+          <li onclick="selectStackCountry(3,this)">吴国</li>
+        </ul>
+        <div class="stackMsgBox flex">
+          <!-- 你确定花费2.1eos，上交21个武器进库到A国家吗？ -->
+        </div>
+        <div class="stackActionBox flex">
+          <div class="actionBtn" onclick="stacknft()">确定上交</div>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="alert" id="unStacknftBox" style="display:none;">
+  <!-- <div class="alert" id="stacknftBox"> -->
+  <div class="flex" style="height:100%;">
+    <div class="content">
+      <div class="header flex">
+        <span>出库信息</span>
+        <span style="flex:1;">
+        </span>
+        <span onclick="$('#unStacknftBox').hide()">
+          <img src="imgs/close.png" alt="" class="closeSvg">
+        </span>
+      </div>
+      <div class="stackCountryBox">
+        
+        <!-- <ul class="countryList flex">
+          <li onclick="selectStackCountry(1,this)" class="active">A国家</li>
+          <li onclick="selectStackCountry(2,this)">B国家</li>
+          <li onclick="selectStackCountry(3,this)">C国家</li>
+        </ul> -->
+        <div class="stackMsgBox flex">
+          <!-- 你确定花费2.1eos，上交21个武器进库到A国家吗？ -->
+        </div>
+        <div class="stackActionBox flex">
+          <div class="actionBtn" onclick="unStacknft()">确定出库</div>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="alert" id="userActionBox" style="display:none;">
+  <div class="flex" style="height:100%;">
+    <div class="content">
+      <div class="header flex">
+        <span>行动</span>
+        <span style="flex:1;">
+        </span>
+        <span onclick="$('#userActionBox').hide()">
+          <img src="imgs/close.png" alt="" class="closeSvg">
+        </span>
+      </div>
+      <div class="stackCountryBox">
+        
+        <div class="stackMsgBox flex" style="height: 395px;">
+          <div style="width: 100%;line-height: 35px;">
+            
+            我的总面值：<span class="myParvalue">--</span><br>
+            已投入行动点：<span class="myFreeact">--</span><br>
+            待领取行动点：<span class="myMiningAct">--</span><br>
+
+          </div>
+          <!-- 你确定花费2.1eos，上交21个武器进库到A国家吗？ -->
+        </div>
+
+
+
+        <div class="sanguoBox flex" style="justify-content: space-between;">
+          <!-- <div class="btn" onclick="selectYourAction(1,'fire')">攻击</div>
+          <div class="btn" onclick="selectYourAction(1,'defence')">防御</div>
+          <div class="btn" onclick="selectYourAction(1,'heal')">加防</div>
+          <div class="btn" style="margin-top: 10px;" onclick="mining(1)">领取行动点</div> -->
+          <!-- <div class="actionBtn" onclick="selectYourAction(1,'fire')">攻击</div>
+          <div class="actionBtn" onclick="selectYourAction(1,'defence')">防御</div>
+          <div class="actionBtn" onclick="selectYourAction(1,'heal')">加防</div>
+          <div class="actionBtn" onclick="mining(1)">领取行动点</div> -->
+        </div>
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="alert" id="kingMsgSHow" style="display:none;">
+  <!-- <div class="alert" id="kingMsgSHow"> -->
+  <div class="flex" style="height:100%;">
+    <div class="content">
+      <div class="header flex">
+        <span id="kingActionTitle">--</span>
+        <span style="flex:1;">
+        </span>
+        <span onclick="$('#kingMsgSHow').hide()">
+          <img src="imgs/close.png" alt="" class="closeSvg">
+        </span>
+      </div>
+      <div class="stackCountryBox">
+        
+        <ul class="countryList flex">
+          <!-- <li onclick="selectCountryAction(1,this)" class="active">A国家</li>
+          <li onclick="selectCountryAction(2,this)">B国家</li>
+          <li onclick="selectCountryAction(3,this)">C国家</li> -->
+        </ul>
+        <div class="kingMsgBox flex">
+          <!-- <div style="width: 100%;">
+            <div>A国家的血量：8888</div>
+            <div>A国家的防御：8888</div>
+            <div>你的行动点：8888</div>
+            <div>你的攻击力：8888</div>
+            <div>你确定花费10行动点，攻击A国家吗？</div>
+          </div> -->
+          
+          <!-- 你确定花费2.1eos，上交21个武器进库到A国家吗？ -->
+        </div>
+        <div class="stackActionBox flex">
+          <div class="actionBtn" onclick="userActionOK()">确定</div>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="alert" id="descriptionMsgBox" style="display: none;">
+  <div class="flex" style="height:100%;">
+    <div class="content">
+      <div class="header flex">
+        <span class="desTitle">说明</span>
+        <span style="flex:1;"></span>
+        <span onclick="$('#descriptionMsgBox').hide()">
+          <img src="imgs/close.png" alt="" class="closeSvg">
+        </span>
+      </div>
+      <div class="stackCountryBox">
+        <div style="height: 370px;line-height:30px;overflow-y: auto;">
+        </div>
+      </div>
+      <div class="flex">
+        <div class="actionBtn" onclick="$('#descriptionMsgBox').hide()">确定</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <script type="text/javascript" src="js/jquery-2.1.0.min.js"></script>
+    <script type="text/javascript" src="js/countUp.js"></script>
+    <script type="text/javascript" src="js/eos16.0.0.min.js"></script>
+    <script type="text/javascript" src="js/scatterjs-core.min.js"></script>
+    <script type="text/javascript" src="js/scatterjs-plugin-eosjs.min.js"></script>
+    <script type="text/javascript" src="js/common.js?v=2020120117"></script>
+    <script type="text/javascript" src="js/index.js?v=2020120117"></script>
+  </body>
+
+</html>
